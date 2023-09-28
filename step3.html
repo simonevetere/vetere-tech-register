@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Vetere Tech User</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div id="main" class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="images/img-01.png" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" id="form-login" onsubmit="return false">
+					<span id="title" class="login100-form-title">
+						Step 3/3 Deploing Chatbot
+					</span>
+
+					<div class="progress">
+					  <div class="progress-bar progress-bar-striped" role="progressbar" id="progressbar" style="width: 0%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					
+					<span id="please" class="login100-form">
+						Please Don't Close Your Browser! Circa 11 minutes left...
+					</span>
+
+					<span id="process" class="login100-form">
+						loading process
+					</span>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Need
+						</span>
+						<a class="txt2" href="#">
+							Help ?
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							Create your Chatbot
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="finish" hidden="true" class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<span id="title" class="login100-form-title">
+						Congratulations process finished, here is a video for a fresh start
+					</span>
+
+				<iframe width="100%" height="315" src="https://www.youtube.com/embed/n2a-S8DZvTQ?si=qbUMWuKmKTEmQCyb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			
+				<div class="container-login100-form-btn">
+					<button id="gotologin" class="login100-form-btn">
+						Go To Login
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+        // Creare un'istanza dell'oggetto XMLHttpRequest
+        let xhr_deploy = new XMLHttpRequest();
+
+        // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+        xhr_deploy.open("GET", "https://vetere.tech/start_deploy", true);
+
+        // Inviare la richiesta al server
+        xhr_deploy.send();
+        
+		function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		async function loading() {
+		
+		var stop_ask = true;
+		  
+        	var instruction = [
+	        	  "Petting the cat",
+				  "Reaching the center of the earth",
+				  "Counting sheep",
+				  "Brewing coffee",
+				  "Solving world hunger",
+				  "Finding Waldo",
+				  "Building a snowman",
+				  "Learning to juggle",
+				  "Knitting a sweater",
+				  "Making popcorn",
+				  "Painting a masterpiece",
+				  "Playing tic-tac-toe",
+				  "Baking a cake",
+				  "Reading a book",
+				  "Tuning a guitar",
+				  "Riding a unicorn",
+				  "Climbing a mountain",
+				  "Dancing with the stars",
+				  "Singing in the shower",
+				  "Flying a kite",
+				  "Chasing a rainbow",
+				  "Inventing a new language",
+				  "Exploring a cave",
+				  "Winning a lottery",
+				  "Cracking a joke",
+				  "Growing a beard",
+				  "Hugging a panda",
+				  "Digging for gold",
+				  "Writing a novel",
+				  "Mixing a cocktail",
+				  "Blowing bubbles",
+				  "Jumping on a trampoline",
+				  "Making a wish",
+				  "Scoring a goal",
+				  "Folding origami",
+				  "Riding a roller coaster",
+				  "Playing chess",
+				  "Doing yoga",
+				  "Eating pizza",
+				  "Watching a movie",
+				  "Taking a nap",
+				  "Planting a tree",
+				  "Running a marathon",
+				  "Swimming with dolphins",
+				  "Traveling to space",
+				  "Fighting zombies",
+				  "Saving the world",
+				  "Becoming a superhero",
+				  "Meeting an alien",
+				  "Finding a treasure"]
+
+        	for(idx = 0; idx < 50; idx ++){
+  		      	await sleep(12000);
+  				document.getElementById("process").innerHTML = '<span id="title" >' + instruction[idx]  + '</span>';
+  				$("#progressbar").css("width", idx * 2 + '%');
+  				if(idx >= 3 && stop_ask){
+
+  					let searchParams = new URLSearchParams(window.location.search)
+
+		            if(searchParams.has('token')){
+		            	var token = searchParams.get('token')
+		            }
+
+		            if(searchParams.has('nome')){
+		            	var nome = searchParams.get('nome')
+		            }
+
+		            // Creare un'istanza dell'oggetto XMLHttpRequest
+		            let xhr_token = new XMLHttpRequest();
+
+		            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+		            xhr_token.open("GET", "https://vetere.tech/check_token?token=" + token + "&nome=" + nome, true);
+
+		            // Assegnare una funzione da eseguire quando la richiesta è completata
+		            xhr_token.onload = function() {
+
+		                var resp = JSON.parse(xhr_token.response);
+
+		                // Verificare se lo status HTTP è 200 (OK)
+		                if (xhr_token.status == 200) {
+		                    
+
+				            if(resp.ip == ""){
+				            	loading();
+				            }
+
+				            // Creare un'istanza dell'oggetto XMLHttpRequest
+				            let hover_api = new XMLHttpRequest();
+
+				            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+				            hover_api.open("GET", "https://vetere.tech/hover_api?nome=" + nome + "&ip=" + resp.ip.replace(/\n/g,''), true);
+
+				            // Assegnare una funzione da eseguire quando la richiesta è completata
+				            hover_api.onload = function() {
+
+				                var resp = JSON.parse(hover_api.response);
+
+				                // Verificare se lo status HTTP è 200 (OK)
+				                if (hover_api.status == 200) {
+				                    stop_ask = false;
+				                // Fare il redirect alla pagina indicata dall'URL
+				                } else {
+				    
+				                    alert(resp.message);
+
+				                    return false;
+				              }
+				            };
+
+				            // Inviare la richiesta al server
+				            hover_api.send();
+
+		                // Fare il redirect alla pagina indicata dall'URL
+		                } else {
+		    
+		                    alert(resp.message);
+
+		                    return false;
+		              }
+		            };
+
+		            // Inviare la richiesta al server
+		            xhr_token.send();
+
+  				}
+  			}
+
+  			
+            $("#main").prop( "hidden", true );
+            $("#finish").prop( "hidden", false );
+
+
+		}
+
+        window.onload = loading;
+	</script>
+</body>
+</html>
