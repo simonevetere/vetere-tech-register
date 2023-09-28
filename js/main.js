@@ -55,7 +55,7 @@ function checkmailtocken (input) {
     var email = $("#email").val();
     var verification = $("#verification").val();
 
-// Creare un'istanza dell'oggetto XMLHttpRequest
+    // Creare un'istanza dell'oggetto XMLHttpRequest
     let xhr = new XMLHttpRequest();
 
     // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
@@ -124,6 +124,8 @@ function step2() {
             var password = $("#password").val();
             var prompt = $("#prompt").val();
      
+            localStorage.setItem("chatbot-name", nome);
+            
             // Creare un'istanza dell'oggetto XMLHttpRequest
             let xhr = new XMLHttpRequest();
 
@@ -135,10 +137,42 @@ function step2() {
 
                 var resp = JSON.parse(xhr.response);
 
+                console.log(xhr.status);
                 // Verificare se lo status HTTP è 200 (OK)
                 if (xhr.status == 200) {
                     
                     alert(resp.message);
+                    
+                    // Creare un'istanza dell'oggetto XMLHttpRequest
+                    let xhr_login = new XMLHttpRequest();
+
+                    // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+                    xhr_login.open("GET", "https://vetere.tech/login?username=" + username +  "&nome=" + nome + "&password=" + password, true);
+
+                    // Assegnare una funzione da eseguire quando la richiesta è completata
+                    xhr_login.onload = function() {
+
+                        var resp = JSON.parse(xhr_login.response);
+                        console.log(xhr_login);
+                        // Verificare se lo status HTTP è 200 (OK)
+                        if (xhr_login.status == 200) {
+                            
+                            alert(resp.message);
+
+                            window.localStorage.setItem('token', resp.token);
+                            window.localStorage.setItem('nome', nome);
+
+                            window.location = "http://127.0.0.1:8081/step3";
+                        // Fare il redirect alla pagina indicata dall'URL
+                        } else {
+            
+                            alert(resp.message);
+
+                            return false;
+                      }
+                    };
+
+                    xhr_login.send();
 
                 // Fare il redirect alla pagina indicata dall'URL
                 } else {
@@ -148,37 +182,6 @@ function step2() {
 
             // Inviare la richiesta al server
             xhr.send();
-
-            // Creare un'istanza dell'oggetto XMLHttpRequest
-            let xhr_login = new XMLHttpRequest();
-
-            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
-            xhr_login.open("GET", "https://vetere.tech/login?username=" + username +  "&nome=" + nome + "&password=" + password, true);
-
-            // Assegnare una funzione da eseguire quando la richiesta è completata
-            xhr_login.onload = function() {
-
-                var resp = JSON.parse(xhr_login.response);
-                console.log(xhr_login);
-                // Verificare se lo status HTTP è 200 (OK)
-                if (xhr_login.status == 200) {
-                    
-                    alert(resp.message);
-
-                    window.localStorage.setItem('token', resp.token);
-                    window.localStorage.setItem('nome', nome);
-
-                    window.location = "http://127.0.0.1:8081/step3";
-                // Fare il redirect alla pagina indicata dall'URL
-                } else {
-    
-                    alert(resp.message);
-
-                    return false;
-              }
-            };
-
-            xhr_login.send();
 
         }
     }
