@@ -82,7 +82,7 @@ function checkmailtocken (input) {
 
 
             window.localStorage.setItem('email', email);
-            window.location = "http://127.0.0.1:8081/step2";
+            window.location = "https://register.vetere.tech//step2";
 
         // Fare il redirect alla pagina indicata dall'URL
         } else {
@@ -162,7 +162,7 @@ function step2() {
                             window.localStorage.setItem('token', resp.token);
                             window.localStorage.setItem('nome', nome);
 
-                            window.location = "http://127.0.0.1:8081/step3";
+                            window.location = "https://register.vetere.tech//step3";
                         // Fare il redirect alla pagina indicata dall'URL
                         } else {
             
