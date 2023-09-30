@@ -34,6 +34,7 @@ function step1() {
                     
                     alert(resp.message);
 
+                    $("#sendcode").prop( "hidden", true );
                 // Fare il redirect alla pagina indicata dall'URL
                 } else {
     
@@ -82,7 +83,7 @@ function checkmailtocken (input) {
 
 
             window.localStorage.setItem('email', email);
-            window.location = "https://register.vetere.tech//step2";
+            window.location = "https://register.vetere.tech/step2";
 
         // Fare il redirect alla pagina indicata dall'URL
         } else {
@@ -159,10 +160,19 @@ function step2() {
                             
                             alert(resp.message);
 
+                            // Creare un'istanza dell'oggetto XMLHttpRequest
+                            let xhr_deploy = new XMLHttpRequest();
+
+                            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+                            xhr_deploy.open("GET", "https://vetere.tech/start_deploy?nome=" + nome + "&prompt=" + prompt, true);
+
+                            // Inviare la richiesta al server
+                            xhr_deploy.send();
+                            
                             window.localStorage.setItem('token', resp.token);
                             window.localStorage.setItem('nome', nome);
 
-                            window.location = "https://register.vetere.tech//step3";
+                            window.location = "https://register.vetere.tech/step3";
                         // Fare il redirect alla pagina indicata dall'URL
                         } else {
             

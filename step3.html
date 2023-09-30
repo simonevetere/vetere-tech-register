@@ -40,7 +40,7 @@
 					</div>
 					
 					<span id="please" class="login100-form">
-						Please Don't Close Your Browser! Circa 11 minutes left...
+						Please Don't Close Your Browser!
 					</span>
 
 					<span id="process" class="login100-form">
@@ -51,15 +51,8 @@
 						<span class="txt1">
 							Need
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" href="https://vetere.tech/ads?#contact">
 							Help ?
-						</a>
-					</div>
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Create your Chatbot
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
 				</form>
@@ -72,14 +65,18 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<span id="title" class="login100-form-title">
-						Congratulations process finished, here is a video for a fresh start
-					</span>
+						Congratulations process finished, here is a video for a fresh start.<br>
+				</span>
+
+				<span>
+						If you encounter connection errors, it may take 10-20 minutes before the DNS is loaded correctly. If you continue to encounter errors after that, do not hesitate to contact us.<br>
+				</span>
 
 				<iframe width="100%" height="315" src="https://www.youtube.com/embed/n2a-S8DZvTQ?si=qbUMWuKmKTEmQCyb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 			
 				<div class="container-login100-form-btn">
-					<button id="gotologin" class="login100-form-btn">
-						Go To Login
+					<button href="https://app.vetere.tech" class="login100-form-btn">
+						Login
 					</button>
 				</div>
 			</div>
@@ -106,15 +103,6 @@
 
 	<script type="text/javascript">
 		
-        // Creare un'istanza dell'oggetto XMLHttpRequest
-        let xhr_deploy = new XMLHttpRequest();
-
-        // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
-        xhr_deploy.open("GET", "https://vetere.tech/start_deploy", true);
-
-        // Inviare la richiesta al server
-        xhr_deploy.send();
-        
 		function sleep(ms) {
 		  return new Promise(resolve => setTimeout(resolve, ms));
 		}
@@ -177,8 +165,11 @@
 
         	for(idx = 0; idx < 50; idx ++){
   		      	await sleep(12000);
+  				
   				document.getElementById("process").innerHTML = '<span id="title" >' + instruction[idx]  + '</span>';
+  				
   				$("#progressbar").css("width", idx * 2 + '%');
+
   				if(idx >= 3 && stop_ask){
 
             		var email = window.localStorage.getItem('email');
@@ -201,9 +192,7 @@
 		                    
 
 				            if(resp.ip == ""){
-				            	loading();
-
-				            	return false;
+        						return false;
 				            }
 
 				            // Creare un'istanza dell'oggetto XMLHttpRequest
@@ -220,6 +209,41 @@
 				                // Verificare se lo status HTTP è 200 (OK)
 				                if (hover_api.status == 200) {
 				                    stop_ask = false;
+
+  									if(!stop_ask && resp.ip != ""){
+
+							            $("#main").prop( "hidden", true );
+							            $("#finish").prop( "hidden", false );
+
+							            // Creare un'istanza dell'oggetto XMLHttpRequest
+							            let end_mail = new XMLHttpRequest();
+
+							            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
+							            end_mail.open("GET", "https://vetere.tech/sendmail?mailto=" + email + "&oggetto=your CHATBOT " + chatbotname + 
+							            														  " is ready!&testo=Hi " + email + "! you can login Here : https://app.vetere.tech, Thanks for using Our services!", true);
+
+							            // Assegnare una funzione da eseguire quando la richiesta è completata
+							            end_mail.onload = function() {
+
+							                var resp = JSON.parse(end_mail.response);
+
+							                // Verificare se lo status HTTP è 200 (OK)
+							                if (end_mail.status == 200) {
+							                    
+							                    alert(resp.message);
+
+							                // Fare il redirect alla pagina indicata dall'URL
+							                } else {
+							    
+							                    alert(resp.message);
+
+							                    return false;
+							              }
+							            };
+
+							            // Inviare la richiesta al server
+							            end_mail.send();
+							        }
 				                // Fare il redirect alla pagina indicata dall'URL
 				                } else {
 				    
@@ -246,40 +270,6 @@
 
   				}
   			}
-
-  			
-            $("#main").prop( "hidden", true );
-            $("#finish").prop( "hidden", false );
-
-            // Creare un'istanza dell'oggetto XMLHttpRequest
-            let end_mail = new XMLHttpRequest();
-
-            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
-            end_mail.open("GET", "https://vetere.tech/sendmail?mailto=" + email + "&oggetto=your CHATBOT " + chatbotname + 
-            														  " is ready!&testo=Hi " + email + "! you can login Here : https://app.vetere.tech, Thanks for using Our services!", true);
-
-            // Assegnare una funzione da eseguire quando la richiesta è completata
-            end_mail.onload = function() {
-
-                var resp = JSON.parse(end_mail.response);
-
-                // Verificare se lo status HTTP è 200 (OK)
-                if (end_mail.status == 200) {
-                    
-                    alert(resp.message);
-
-                // Fare il redirect alla pagina indicata dall'URL
-                } else {
-    
-                    alert(resp.message);
-
-                    return false;
-              }
-            };
-
-            // Inviare la richiesta al server
-            end_mail.send();
-
 
 		}
 
