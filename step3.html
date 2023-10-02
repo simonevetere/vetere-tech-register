@@ -192,7 +192,7 @@
 		                    
 
 				            if(resp.ip == ""){
-        						return false;
+        						return true;
 				            }
 
 				            // Creare un'istanza dell'oggetto XMLHttpRequest
@@ -212,30 +212,26 @@
 
   									if(!stop_ask && resp.ip != ""){
 
-							            $("#main").prop( "hidden", true );
-							            $("#finish").prop( "hidden", false );
-
 							            // Creare un'istanza dell'oggetto XMLHttpRequest
 							            let end_mail = new XMLHttpRequest();
 
 							            // Aprire la connessione con il server specificando il metodo, l'URL e la modalità asincrona
 							            end_mail.open("GET", "https://vetere.tech/sendmail?mailto=" + email + "&oggetto=your CHATBOT " + chatbotname + 
-							            														  " is ready!&testo=Hi " + email + "! you can login Here : https://app.vetere.tech, Thanks for using Our services!", true);
+							            														  " info&testo=Hi " + email + "!\n you can login Here : https://app.vetere.tech, Thanks for using Our services!", true);
 
 							            // Assegnare una funzione da eseguire quando la richiesta è completata
 							            end_mail.onload = function() {
 
-							                var resp = JSON.parse(end_mail.response);
+							                var resp = end_mail.response;
 
 							                // Verificare se lo status HTTP è 200 (OK)
 							                if (end_mail.status == 200) {
 							                    
-							                    alert(resp.message);
+							                    return true;
 
 							                // Fare il redirect alla pagina indicata dall'URL
 							                } else {
 							    
-							                    alert(resp.message);
 
 							                    return false;
 							              }
@@ -269,10 +265,14 @@
 		            xhr_token.send();
 
   				}
+  				if(idx==49){
+			        $("#main").prop( "hidden", true );
+			        $("#finish").prop( "hidden", false );
+  				}
   			}
 
 		}
-
+        
         window.onload = loading;
 	</script>
 </body>
