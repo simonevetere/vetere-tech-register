@@ -106,11 +106,18 @@ function step2() {
      
         } else {
 
-            if($("#chatbot-name").val().indexOf(".") >= 0 || $("#chatbot-name").val().indexOf(" ") >= 0 || $("#chatbot-name").val() == ""){
-                
-                alert("Invalid Chatbot Name");
+            // Crea un oggetto RegExp con il modello desiderato
+            var regex = /^[A-Za-z]+$/;
+
+            // Ottieni il valore del campo
+            var name = $("#chatbot-name").val();
+            // Testa se il valore corrisponde alla regex
+            if (!regex.test(name) || $("#chatbot-name").val().indexOf(".") > 0 || $("#chatbot-name").val().indexOf(" ") > 0 || $("#chatbot-name").val() == "") {
+                    
+                alert("Invalid Chatbot Name, please use a-z,A-Z");
 
                 return false;
+            
             }
 
             if($("#prompt").val() == ""){
@@ -119,6 +126,14 @@ function step2() {
 
                 return false;
             }
+
+            if($("#password").val().length < 8){
+            
+                alert("password minimum lenght 8 char");
+
+                return false;
+            }                
+
 
             var username = $("#email").val();
             var nome = $("#chatbot-name").val();
